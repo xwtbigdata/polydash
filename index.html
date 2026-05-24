@@ -48,7 +48,7 @@ body{font-family:-apple-system,system-ui,sans-serif;background:#0a0e17;color:#c9
 </div>
 <div class="footer">gamma-api.polymarket.com · 整体预测准确率 82%</div>
 <div class="detail-card" id="detail_card"></div>
-<script>
+<script>const bios={"马克·凯利":"亚利桑那州联邦参议员，民主党温和派代表","拉姆·伊曼纽尔":"前奥巴马白宫幕僚长、芝加哥市长","安迪·贝希尔":"肯塔基州州长，民主党红州突围代表","皮特·布蒂吉格":"前南本德市长、拜登政府交通部长","乔恩·奥索夫":"佐治亚州联邦参议员，民主党年轻骨干","卡玛拉·哈里斯":"现任美国副总统，民主党核心人物","唐纳德·特朗普":"美国前总统，共和党保守派领袖","小唐纳德·特朗普":"特朗普长子，知名政治活动参与者","罗恩·德桑蒂斯":"佛罗里达州州长，共和党新星候选人","塔克·卡尔森":"前福克斯新闻主持人，保守派意见领袖","马可·卢比奥":"佛罗里达州联邦参议员，共和党拉丁裔代表","J·D·万斯":"俄亥俄州联邦参议员，保守派畅销书作者"};
 const wcData = [{"name": "\u632a\u5a01", "prob": 12.0, "vol": "21.2M"}, {"name": "\u8377\u5170", "prob": 11.8, "vol": "21.2M"}, {"name": "\u5df4\u897f", "prob": 11.2, "vol": "21.3M"}, {"name": "Portugal", "prob": 11.1, "vol": "23.1M"}, {"name": "\u6cd5\u56fd", "prob": 10.1, "vol": "30.0M"}, {"name": "\u897f\u73ed\u7259", "prob": 10.1, "vol": "24.0M"}];
 const sportsTop = [{"label": "NBA \u9a6c\u523a", "icon": "\ud83c\udfc0", "name": "\u9a6c\u523a", "sport": "NBA", "prob": 42.4, "color": "#3b82f6", "vol": "30.1M"}, {"label": "\u6b27\u51a0 \u5df4\u9ece\u5723\u65e5\u8033\u66fc\u201326", "icon": "\u26bd", "name": "\u5df4\u9ece\u5723\u65e5\u8033\u66fc\u201326", "sport": "\u6b27\u51a0", "prob": 42.4, "color": "#8b5cf6", "vol": "9.9M"}, {"label": "NHL \u96ea\u5d29NHL", "icon": "\ud83c\udfd2", "name": "\u96ea\u5d29NHL", "sport": "NHL", "prob": 27.5, "color": "#f59e0b", "vol": "15.0M"}, {"label": "F1 \u5b89\u4e1c\u5185\u5229F1\u8f66\u624b\u51a0\u519b", "icon": "\ud83c\udfce\ufe0f", "name": "\u5b89\u4e1c\u5185\u5229F1\u8f66\u624b\u51a0\u519b", "sport": "F1", "prob": 12.3, "color": "#ec4899", "vol": "3.1M"}, {"label": "\u4e16\u754c\u676f \u6cd5\u56fd", "icon": "\ud83c\udfc6", "name": "\u6cd5\u56fd", "sport": "\u4e16\u754c\u676f", "prob": 10.1, "color": "#10b981", "vol": "30.0M"}];
 const polEvents = [{"title": "\u6c11\u4e3b\u515a\u63d0\u540d", "ops": [{"name": "\u52a0\u6587\u00b7\u52a0\u6587\u00b7\u7ebd\u68ee", "prob": 9.0}, {"name": "\u9a6c\u514b\u00b7\u51ef\u5229", "prob": 11.7}, {"name": "\u62c9\u59c6\u00b7\u4f0a\u66fc\u7ebd\u5c14", "prob": 11.7}, {"name": "亚历山德里娅·奥卡西奥-科尔特斯", "prob": 10.8}]}, {"title": "\u5171\u548c\u515a\u63d0\u540d", "ops": [{"name": "\u7f57\u6069\u00b7\u5fb7\u6851\u8482\u65af", "prob": 16.6}, {"name": "J·D·万斯", "prob": 11.1}, {"name": "\u5854\u514b\u00b7\u5361\u5c14\u68ee", "prob": 16.4}, {"name": "\u9a6c\u53ef\u00b7\u5362\u6bd4\u5965", "prob": 13.4}]}, {"title": "\u7f8e\u56fd\u603b\u7edf\u5927\u9009", "ops": [{"name": "\u7ebd\u68eeUSPresiden", "prob": 8.1}, {"name": "\u4e07\u65afUSPresiden", "prob": 7.9}, {"name": "AOCUSPreside", "prob": 9.2}, {"name": "\u5fb7\u6851\u8482\u65afUSPresid", "prob": 9.5}]}];
@@ -96,9 +96,11 @@ function createDonut(chartId, tableRows, data, title, party) {
             textStyle: {color: '#e2e8f0', fontSize: 12},
             formatter: function(p) {
                 const item = data[p.dataIndex];
-                return '<div style="font-size:14px;font-weight:bold;color:#58a6ff;margin-bottom:4px">'+item.name+'</div>'+
-                    '<div style="color:#8b949e">所属党派: '+party+'</div>'+
-                    '<div style="margin-top:4px"><span style="font-size:16px;color:#f0f6fc;font-weight:bold">'+item.value+'%</span> <span style="color:#8b949e">提名概率</span></div>';
+                return '<div style="font-size:15px;font-weight:bold;color:#58a6ff;margin-bottom:4px">'+item.name+'</div>'+
+                    '<div style="color:#8b949e;margin-bottom:6px">所属党派: '+party+'</div>'+
+                    '<div style="margin-bottom:6px"><span style="font-size:20px;color:#f0f6fc;font-weight:bold">'+item.value+'%</span> <span style="color:#8b949e">提名概率</span></div>'+
+                    '<div style="color:#94a3b8;font-size:11px;line-height:1.5;border-top:1px solid #1e293b;padding-top:6px;margin-bottom:6px"><span style="color:#64748b">简介: </span>'+ (bios[item.name]||'暂无简介') +'</div>'+
+                    '<div style="color:#475569;font-size:9px;text-align:right">点击查看百科 &#8594;</div>';
             },
             extraCssText: 'border-radius:8px;padding:12px;box-shadow:0 4px 20px rgba(0,0,0,0.5)'
         },
